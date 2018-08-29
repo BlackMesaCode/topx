@@ -15,8 +15,11 @@ namespace TopX.Crosshairs
             var brush = new SolidBrush(Color.FromArgb(254, 0, 255, 0));
             e.Graphics.FillRectangle(brush, xPos, yPos, xhairWidth, xhairHeight);
 
-            // draw left helper line
-            var helperLineWidth = 10;
+            // draw helper lines
+            var helperLineWidth = 20;
+            var offset = 12;
+            e.Graphics.FillRectangle(brush, xPos - offset - helperLineWidth, yPos, helperLineWidth, 1);
+            e.Graphics.FillRectangle(brush, xPos + xhairWidth + offset, yPos, helperLineWidth, 1);
 
 
         }
