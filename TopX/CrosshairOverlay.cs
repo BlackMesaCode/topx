@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TopX.Crosshairs;
@@ -37,7 +36,7 @@ namespace TopX
             // Setup Crosshair
             CurrentCrosshair = new GreenCrosshair();
 
-            //Set the Alpha on the whole window to 255 (solid)
+            //Set Alpha to Solid
             Win32.SetLayeredWindowAttributes(this.Handle, 0, 255, Win32.LWA_ALPHA);
         }
 
@@ -108,11 +107,11 @@ namespace TopX
                 Bottom = this.Height
             };
 
-            // Expand the Aero Glass Effect Border to the WHOLE form.
-            // since we have already had the border invisible we now
-            // have a completely invisible window - apart from the DirectX
-            // renders NOT in black.
+            // DwmExtendFrameIntoClientArea is part of the "Aero effects library"
+            // Negative margins would have special meaning (glass effect) to DwmExtendFrameIntoClientArea - but we dont use the glassy look
+            // we just use the function to render everything transparent that is of the color black
             Win32.DwmExtendFrameIntoClientArea(this.Handle, ref margins);
+            
         }
 
     }
