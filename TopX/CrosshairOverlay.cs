@@ -32,12 +32,18 @@ namespace TopX
             SystemTray = new SystemTray(this.NotifyIcon);
             SystemTray.ToggleMenuItem.Click += ToggleMenuItem_Click;
             Load += CrosshairOverlay_Load;
+            FormClosed += CrosshairOverlay_FormClosed;
 
             // Setup Crosshair
             CurrentCrosshair = new GreenCrosshair();
 
             //Set Alpha to Solid
             Win32.SetLayeredWindowAttributes(this.Handle, 0, 255, Win32.LWA_ALPHA);
+        }
+
+        private void CrosshairOverlay_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ProcessWatcher?.Dispose();
         }
 
         private IEnumerable<string> GetRunningProcesses()
